@@ -4,7 +4,7 @@ import "net/http"
 
 var API_URL = "https://api.gojekapi.com"
 
-func Request(method string, url string) (*Response, error) {
+func Request(method string, url string) (*http.Response, error) {
 	var getURL = API_URL + url
 
 	client := &http.Client{}

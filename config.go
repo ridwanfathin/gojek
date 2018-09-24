@@ -27,7 +27,7 @@ func GetAppVersion() string {
 func GetClientSecret() string {
 	return clientSecret
 }
-func GetLocation(Location string) {
+func SetLocation(Location string) {
 	location = Location
 }
 func GetLocation() string {

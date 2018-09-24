@@ -9,7 +9,7 @@ func Request(method string, url string) (*http.Response, error) {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest(method, getURL, nil)
+	req, _ := http.NewRequest(method, getURL, nil)
 	req.Header.Add("content-type", "application/json")
 	req.Header.Add("X-AppVersion", GetAppVersion())
 	req.Header.Add("X-UniqueId", GetUniqueId())

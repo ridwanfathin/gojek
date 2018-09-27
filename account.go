@@ -24,22 +24,23 @@ func LoginWithPhone(phone string) []byte {
  */
 func GenerateCustomerToken(otp string, loginToken string) []byte {
 	var jsonStr = []byte(
-		`{"scope":"gojek:customer:transaction gojek:customer:readonly"}`,
-		`{"grant_type":"password"}`,
-		`{"login_token":"`+loginToken+`"}`,
-		`{"otp":"`+otp+`"}`,
-		`{"client_id":"gojek:cons:android"}`,
-		`{"client_secret":"`+GetClientSecret()+`"}`,
-	)
+		`{"scope":"gojek:customer:transaction gojek:customer:readonly",` +
+			`"grant_type":"password",` +
+			`"login_token":"` + loginToken + `",` +
+			`"otp":"` + otp + `",` +
+			`"client_id":"gojek:cons:android",` +
+			`"client_secret":"` + GetClientSecret() + `"}`)
 
 	res := Request("POST", jsonStr, "/v3/customers/token")
 
 	return res
 }
 
-func Logout() {
+func Logout() []byte {
 
 	res := Request("DELETE", nil, "/v3/auth/token")
+
+	return res
 }
 
 func GetCustomerInfo() []byte {
@@ -52,10 +53,9 @@ func GetCustomerInfo() []byte {
 func EditAccount(phone string, email string, name string) []byte {
 
 	var jsonStr = []byte(
-		`{"phone":"`+phone+`"}`,
-		`{"email":"`+email+`"}`,
-		`{"name":"`+name+`"}`,
-	)
+		`{"phone":"` + phone + `",` +
+			`{"email":"` + email + `",` +
+			`{"name":"` + name + `"}`)
 
 	res := Request("POST", jsonStr, "/gojek/v2/customer/edit/v2")
 
@@ -65,10 +65,9 @@ func EditAccount(phone string, email string, name string) []byte {
 func VerifyEditAccount(id string, phone string, verificationCode string) []byte {
 
 	var jsonStr = []byte(
-		`{"id":"`+id+`"}`,
-		`{"phone":"`+phone+`"}`,
-		`{"verificationCode":"`+verificationCode+`"}`,
-	)
+		`{"id":"` + id + `",` +
+			`"phone":"` + phone + `",` +
+			`"verificationCode":"` + verificationCode + `"}`)
 
 	res := Request("POST", jsonStr, "/gojek/v2/customer/edit/v2")
 

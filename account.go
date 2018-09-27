@@ -1,17 +1,22 @@
 package gojek
 
 func LoginWithEmail(email string) []byte {
-	var jsonStr = []byte(`{"email":"` + email + `"}`)
 
-	res := Request("POST", jsonStr, "/v3/customers/login_with_email")
+	var options = map[string]string{
+		"method": "POST",
+		"body":   `{"email":"` + email + `"}`}
+
+	res := Request(options, "/v3/customers/login_with_email")
 
 	return res
 }
 
 func LoginWithPhone(phone string) []byte {
-	var jsonStr = []byte(`{"phone":"` + phone + `"}`)
+	var options = map[string]string{
+		"method": "POST",
+		"body":   `{"phone":"` + phone + `"}`}
 
-	res := Request("POST", jsonStr, "/v3/customers/login_with_phone")
+	res := Request(options, "/v3/customers/login_with_phone")
 
 	return res
 }
@@ -23,53 +28,62 @@ func LoginWithPhone(phone string) []byte {
 *  @return access_token This is customer token. User function gojek.setToken
  */
 func GenerateCustomerToken(otp string, loginToken string) []byte {
-	var jsonStr = []byte(
-		`{"scope":"gojek:customer:transaction gojek:customer:readonly",` +
+	var options = map[string]string{
+		"method": "POST",
+		"body": `{"scope":"gojek:customer:transaction gojek:customer:readonly",` +
 			`"grant_type":"password",` +
 			`"login_token":"` + loginToken + `",` +
 			`"otp":"` + otp + `",` +
 			`"client_id":"gojek:cons:android",` +
-			`"client_secret":"` + GetClientSecret() + `"}`)
+			`"client_secret":"` + GetClientSecret() + `"}`}
 
-	res := Request("POST", jsonStr, "/v3/customers/token")
+	res := Request(options, "/v3/customers/token")
 
 	return res
 }
 
 func Logout() []byte {
 
-	res := Request("DELETE", nil, "/v3/auth/token")
+	var options = map[string]string{
+		"method": "DELETE"}
+
+	res := Request(options, "/v3/auth/token")
 
 	return res
 }
 
 func GetCustomerInfo() []byte {
 
-	res := Request("GET", nil, "/gojek/v2/customer")
+	var options = map[string]string{
+		"method": "GET"}
+
+	res := Request(options, "/gojek/v2/customer")
 
 	return res
 }
 
 func EditAccount(phone string, email string, name string) []byte {
 
-	var jsonStr = []byte(
-		`{"phone":"` + phone + `",` +
+	var options = map[string]string{
+		"method": "POST",
+		"body": `{"phone":"` + phone + `",` +
 			`{"email":"` + email + `",` +
-			`{"name":"` + name + `"}`)
+			`{"name":"` + name + `"}`}
 
-	res := Request("POST", jsonStr, "/gojek/v2/customer/edit/v2")
+	res := Request(options, "/gojek/v2/customer/edit/v2")
 
 	return res
 }
 
 func VerifyEditAccount(id string, phone string, verificationCode string) []byte {
 
-	var jsonStr = []byte(
-		`{"id":"` + id + `",` +
+	var options = map[string]string{
+		"method": "POST",
+		"body": `{"id":"` + id + `",` +
 			`"phone":"` + phone + `",` +
-			`"verificationCode":"` + verificationCode + `"}`)
+			`"verificationCode":"` + verificationCode + `"}`}
 
-	res := Request("POST", jsonStr, "/gojek/v2/customer/edit/v2")
+	res := Request(options, "/gojek/v2/customer/edit/v2")
 
 	return res
 }

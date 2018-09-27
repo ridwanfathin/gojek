@@ -1,6 +1,6 @@
 package gojek
 
-var token = ""
+var token = "a029974f-54a9-40a6-84e7-461fba81818d"
 var uniqueId = "9774d56d682e549c"
 var appVersion = "2.28.2"
 var clientSecret = "83415d06-ec4e-11e6-a41b-6c40088ab51e"

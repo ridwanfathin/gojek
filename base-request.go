@@ -1,20 +1,32 @@
 package gojek
 
-import "net/http"
+import (
+	"bytes"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
 
 var API_URL = "https://api.gojekapi.com"
 
-func Request(method string, url string) (*http.Response, error) {
+func Request(method string, jsonBody []byte, url string) []byte {
 	var getURL = API_URL + url
 
-	client := &http.Client{}
-
-	req, _ := http.NewRequest(method, getURL, nil)
-	req.Header.Add("content-type", "application/json")
+	req, _ := http.NewRequest(method, getURL, bytes.NewBuffer(jsonBody))
+	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("X-AppVersion", GetAppVersion())
 	req.Header.Add("X-UniqueId", GetUniqueId())
 	req.Header.Add("X-Location", GetLocation())
 	req.Header.Add("Authorization", "Bearer "+GetToken())
 
-	return client.Do(req)
+	res, err := http.DefaultClient.Do(req)
+
+	if err != nil {
+		fmt.Printf(fmt.Sprint(err))
+	}
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	return body
 }

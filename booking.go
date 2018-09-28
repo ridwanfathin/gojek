@@ -1,6 +1,6 @@
 package gojek
 
-func getBookingHistory(userId string) []byte {
+func GetBookingHistory(userId string) []byte {
 	var options = map[string]string{
 		"method": "GET",
 	}
@@ -9,7 +9,7 @@ func getBookingHistory(userId string) []byte {
 	return res
 }
 
-func getActiveBooking() []byte {
+func GetActiveBooking() []byte {
 	var options = map[string]string{
 		"method": "GET",
 	}
@@ -18,7 +18,7 @@ func getActiveBooking() []byte {
 	return res
 }
 
-func getBookingByOrderNo(orderNo string) []byte {
+func GetBookingByOrderNo(orderNo string) []byte {
 	var options = map[string]string{
 		"method": "GET",
 	}
@@ -27,7 +27,7 @@ func getBookingByOrderNo(orderNo string) []byte {
 	return res
 }
 
-func calculate() []byte {
+func Calculate() []byte {
 	var options = map[string]string{
 		"method": "POST",
 	}

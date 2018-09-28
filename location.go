@@ -1,6 +1,6 @@
 package gojek
 
-func ReverseGeocode(latLong) []byte {
+func ReverseGeocode(latLong string) []byte {
 
 	var options = map[string]string{
 		"method": "GET",

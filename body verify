@@ -1,8 +1,0 @@
-{
-	"scopes": "gojek:customer: transaction gojek:customer:readonly",
-	"grant_type": "password",
-	"login_token": "ab126cf4-fae8-4834-b2b7-4be13a91e190",
-	"otp": "7012",
-	"client_id": "gojek:cons:android",
-	"client_secret": "83415d06-ec4e-11e6-a41b-6c40088ab51e"
-}

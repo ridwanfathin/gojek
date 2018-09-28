@@ -1,12 +1,12 @@
 package gojek
 
 /**
-    * @param latLong Required latitude,longitude
-    */
+ * @param latLong Required latitude,longitude
+ */
 func GetGoFoodHome(latLong string) []byte {
-    var options = map[string]string{
-        "method": "GET",
-        "qs":`{"location":"` + latLong + `"}`}
+	var options = map[string]string{
+		"method": "GET",
+		"qs":     `{"location":"` + latLong + `"}`}
 
 	res := Request(options, "/gofood/consumer/v2/home")
 	return res
@@ -15,7 +15,7 @@ func GetGoFoodHome(latLong string) []byte {
 // page start from 0
 func GetNearestGoFood(latLong string, page string, limit string) []byte {
 
-    var options = map[string]string{
+	var options = map[string]string{
 		"method": "GET",
 		"qs": `{"location":"` + latLong + `",` +
 			`"page":"` + page + `",` +
@@ -28,19 +28,19 @@ func GetNearestGoFood(latLong string, page string, limit string) []byte {
 
 func GetRestaurant(restaurantId string) []byte {
 
-    var options = map[string]string{
+	var options = map[string]string{
 		"method": "GET"}
 
-	res := Requestoptions, "/gofood/consumer/v2/restaurants/" + restaurantId)
+	res := Request(options, "/gofood/consumer/v2/restaurants/"+restaurantId)
 
 	return res
 }
 
 func GetRestaurantsByCategory(category string, page string, limit string) []byte {
 
-    var options = map[string]string{
+	var options = map[string]string{
 		"method": "GET",
-		"qs": `{"category":"` + latLong + `",` +
+		"qs": `{"category":"` + category + `",` +
 			`"page":"` + page + `",` +
 			`"client_secret":"` + limit + `"}`}
 

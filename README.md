@@ -17,18 +17,18 @@ By default the module set the `location`, `uniqueId` and `appVersion`. This valu
 
 ### Set unique id
 ```go
-gojek.setUniqueId('YOUR_UNIQUE_ID');
+gojek.SetUniqueId('YOUR_UNIQUE_ID')
 ```
 
 ### Set app version
 ```go
-gojek.setAppVersion('YOUR_APP_VERSION');
+gojek.SetAppVersion('YOUR_APP_VERSION')
 ```
 
 ### Set token
 By default the token is not set by this module. You can set token after you call a login API
 ```go
-gojek.setToken('YOUR_TOKEN');
+gojek.SetToken('YOUR_TOKEN')
 ```
 
 
@@ -37,36 +37,28 @@ gojek.setToken('YOUR_TOKEN');
 Go-Jek support 2 method for login (Email or Phone number login)
 
 ```go
-gojek.loginWithEmail('your@email.com', function(error ,response, body){
-	console.log(body);
-});
+res := gojek.LoginWithEmail('your@email.com') //[]byte
 ```
 
 ```go
-gojek.loginWithPhone('+628123456789', function(error ,response, body){
-	console.log(body);
-});
+res := gojek.LoginWithPhone('+628123456789') //[]byte
 ```
 
 After request that API, the registered phone number will receive an OTP. 
 You must save your `login_token` to be used in next step :
 
 ```go
-gojek.generateCustomerToken('1234', 'login_token', function(error ,response, body){
-	console.log(body);
-});
+res := gojek.GenerateCustomerToken('1234', 'login_token') //[]byte
 ```
 
 Save `access_token`, then call :
 ```go
-gojek.setToken('access_token');
+gojek.SetToken('access_token')
 ```
 
 ### Get customer info
 ```go
-gojek.getCustomerInfo(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetCustomerInfo()
 ```
 
 ### Edit account
@@ -74,9 +66,7 @@ gojek.getCustomerInfo(function (err, res, body) {
 - Param 2: Email
 - Param 3: Name
 ```go
-gojek.editAccount('+628123456789','email@domain.com','NAME', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.EditAccount('+628123456789','email@domain.com','NAME')
 ```
 
 
@@ -85,65 +75,49 @@ gojek.editAccount('+628123456789','email@domain.com','NAME', function (err, res,
 ## Go-Pay
 ### Get Go-Pay info
 ```go
-gojek.getGoPayDetail(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetGoPayDetail()
 ```
 ### Get Go-Pay transaction history 
 - Param 1: Page number (start from 1)
 - Param 2: Limit per page
 ```go
-gojek.getGoPayHistory(1, 30, function (err, res, body) {
-    console.log(body);
-});
+gojek.GetGoPayHistory(1, 30)
 ```
 ### Get Go-Pay id by phone
 ```go
-gojek.getGoPayQrId('+628123456789', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.getGoPayQrId('+628123456789')
 ```
 ### Transfer Go-Pay money
 ```go
-gojek.transferGoPay('QR_ID', 10000, 'YOUR_DESCRIPTION', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.TransferGoPay('QR_ID', 10000, 'YOUR_DESCRIPTION')
 ```
 
 ## Go-Mart
 ### Get nearest Go-Mart
 - Param 1: latitude,longitude
 ```go
-gojek.getNearestGoMart('-6.180495,106.824992', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetNearestGoMart('-6.180495,106.824992')
 ```
 
 ## Go-Food
 ### Get Go-Food Home
 ```go
-gojek.setToken('ACCESS_TOKEN');
-gojek.setLocation('-6.180495,106.824992');
-gojek.getGoFoodHome(gojek.getLocation(), function (err, res, body) {
-    console.log(body);
-});
+gojek.SetToken('ACCESS_TOKEN')
+gojek.SetLocation('-6.180495,106.824992')
+res := gojek.GetGoFoodHome(gojek.getLocation())
 ```
 ### Get nearest Go-Food
 - Param 1: latitude,longitude
 - Param 2: Page (start from 0)
 - Param 3: Limit
 ```go
-gojek.getNearestGoFood(gojek.getLocation(), 0, 10, function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetNearestGoFood(gojek.getLocation(), 0, 10)
 ```
 
 ### Get restaurant
 - Param 1: Restaurant UUID
 ```go
-gojek.getRestaurant('UUID', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetRestaurant('UUID')
 ```
 
 ### Get restaurants by category
@@ -151,33 +125,25 @@ gojek.getRestaurant('UUID', function (err, res, body) {
 - Param 2: Page number (start from 0)
 - Param 3: Limit per page
 ```go
-gojek.setToken('ACCESS_TOKEN');
-gojek.setLocation('-6.180495,106.824992');
-gojek.getRestaurantsByCategory('HEALTHY_FOOD', '0', '32', function (err, res, body) {
-    console.log(body);
-});
+gojek.SetToken('ACCESS_TOKEN')
+gojek.SetLocation('-6.180495,106.824992')
+res := gojek.GetRestaurantsByCategory('HEALTHY_FOOD', '0', '32')
 ```
 
 ## Booking
 ### Get active booking
 ```go 
-gojek.getActiveBooking(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetActiveBooking()
 ```
 
 ### Get booking history
 ```go
-gojek.getBookingHistory(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetBookingHistory()
 ```
 
 ### Get booking by order no
 ```go
-gojek.getBookingByOrderNo('123456', function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetBookingByOrderNo('123456')
 ```
 
 ### Cancel booking
@@ -186,21 +152,15 @@ gojek.getBookingByOrderNo('123456', function (err, res, body) {
 
 ### Get Go-Points
 ```go
-gojek.getGoPoints(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.GetGoPoints()
 ```
 
 ### Next Go-Points
 ```go
-gojek.nextPointsToken(function (err, res, body) {
-    console.log(body);
-});
+res := gojek.NextPointsToken()
 ```
 
 ### Redeem Go-Points
 ```go
-gojek.redeemGoPointsToken('POINTS_TOKEN_ID',function (err, res, body) {
-    console.log(body);
-});
+res := gojek.RedeemGoPointsToken('POINTS_TOKEN_ID')
 ```

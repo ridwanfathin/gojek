@@ -29,5 +29,10 @@ func Request(options map[string]string, url string) []byte {
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
 
+	// var response = map[string]string{}
+	// json.Unmarshal(body, &response)
+
+	// fmt.Println(response)
+
 	return body
 }
